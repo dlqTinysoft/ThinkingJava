@@ -1,0 +1,21 @@
+
+
+spring:
+#  配置一个数据源
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+#      注意mysql是url,username,password 不要搞错了
+      url: jdbc:mysql://localhost:3306/dbgirl?useSSL=false
+      username: root
+      password: root
+
+  jpa:
+    database: mysql
+#    是否显示生产的数据
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#        注意这个一定要配置mysql的方言
+    database-platform: org.hibernate.dialect.MySQL5Dialect
