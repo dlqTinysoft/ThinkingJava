@@ -12,7 +12,7 @@ public class Test {
 
     @org.junit.Test
     public void test(){
-        SortClass<Student> sortClass = new SortClass<Student>(new Comparator<Student>() {
+        SortClass sortClass = new SortClass(new Comparator<Student>() {
             public int compare(Student source, Student target) {
                 if(source.getAge()>target.getAge()){
                     return 1;
@@ -43,7 +43,8 @@ public class Test {
         Integer [] data = new Integer[]{1,5,9,0,3,2,18};
         SortClass<Integer> sortClass = new SortClass();
         //sortClass.selectSort(data);
-        sortClass.insertSortPromotion(data);
+        //sortClass.insertSortPromotion(data);
+        sortClass.mergeSortPromotion(data);
         for(Integer i:data){
             System.out.print(i+" ");
         }
