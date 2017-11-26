@@ -30,7 +30,7 @@ public class Test {
         Student [] students = new Student[]{student1,student2,
                 student3,student4,student5};
 
-        sortClass.selectSort(students);
+        sortClass.speedSort2(students);
 
         for(Student student:students){
             System.out.println(student.getName()+"--"+student.getAge());
@@ -44,7 +44,8 @@ public class Test {
         SortClass<Integer> sortClass = new SortClass();
         //sortClass.selectSort(data);
         //sortClass.insertSortPromotion(data);
-        sortClass.mergeSortPromotion(data);
+        //sortClass.mergeSortPromotion(data);
+        sortClass.speedSort2(data);
         for(Integer i:data){
             System.out.print(i+" ");
         }

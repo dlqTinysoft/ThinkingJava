@@ -102,6 +102,125 @@ public class SortClass<T> {
            }
     }
 
+    //快速排序代码实现,单路寻找枢轴
+    public void speedSort(T[] data){
+        int left = 0 ;
+        int right = data.length-1;
+        _speedSort(data,left,right);
+    }
+
+    //快速排序代码实现，双路寻找枢轴
+    public void speedSort1(T[] data){
+        int left = 0 ;
+        int right = data.length-1;
+        _speedSort1(data,left,right);
+    }
+
+    //快速排序代码实现，三路寻找枢轴
+    public void speedSort2(T[] data){
+        int left = 0 ;
+        int right = data.length-1;
+        _speedSort2(data,left,right);
+    }
+
+    private void _speedSort(T[] data, int left,int right){
+        if(left>=right)
+            return ;
+        int paritition = _paritition(data,left,right);
+        _speedSort(data,left,paritition-1);
+        _speedSort(data,paritition+1,right);
+    }
+
+    private void _speedSort1(T[] data,int left,int right){
+
+        if(left>=right)
+            return;
+        int paritition = _paritition1(data,left,right);
+        _speedSort1(data,left,paritition-1);
+        _speedSort1(data,paritition+1,right);
+    }
+
+    //快速排序算法实现，三路寻找枢轴
+    private void _speedSort2(T[] data,int left,int right){
+          if(left>=right)
+              return;
+          int [] parititions = _paritition2(data,left,right);
+          int lt=parititions[0];
+          int gt=parititions[1];
+          _speedSort2(data,left,lt-1);
+          _speedSort2(data,gt,right);
+    }
+
+    //单路寻找枢轴，这有个致命的缺点，就是要排序的序列，重复序列很多时，就退化成了o(n^2)了
+    private int _paritition(T[] data,int left,int right){
+        T v = data[left];
+        //[left+1,j]
+        int j = left;
+        //[j+1,i)
+        int i=left+1;
+        for(;i<=right;i++)
+            if(_compare(data[i],v)==-1)
+                _swap(data,++j,i);
+        _swap(data,left,j);
+        return j;
+    }
+
+    //使用二路法，来寻找枢轴
+    private int _paritition1(T[] data,int left,int right){
+        T v = data[left];
+        //[left+1,i)
+        int i = left+1;
+        //(j,right]
+        int j=right;
+
+        while(true){
+
+            while(i<=right)
+                if(_compare(data[i],v)==-1 ) i++;
+                else
+                    break;
+           while(j>=left+1 )
+            if(_compare(data[j],v)==1) j--;
+            else
+                break;
+            //在这里必须注意，先判断i是否大于j,然后才进行交换，否则会数组出现越界情况
+            if(i>j)
+                break;
+            _swap(data,i,j);
+            i++;
+            j--;
+
+        }
+      _swap(data,left,j);
+        return j;
+    }
+
+    //使用三路法来寻找枢轴
+    private int[] _paritition2(T[] data,int left ,int right){
+        int [] parititions = new int[2];
+        T v = data[left];
+        //[left+1,lt]
+        int lt = left;
+        //[gt,right]
+        int gt=right+1;
+        //[left+1,i)
+        int i = left+1;
+        while(i<gt){
+            if(_compare(data[i],v)==-1){
+                _swap(data,++lt,i);
+                i++;
+            }
+            else if(_compare(data[i],v)==1){
+                _swap(data,i,--gt);
+            }else
+                i++;
+        }
+        _swap(data,left,lt);
+         parititions[0]=lt;
+         parititions[1]=gt;
+        return parititions;
+    }
+
     private void _mergeSort(T[] data, int left, int right) {
         if (left == right)
             return;
@@ -157,12 +276,14 @@ public class SortClass<T> {
         Comparable<Object> comparable = (Comparable<Object>) source;
         return comparable.compareTo(target);
     }
+
     //交换数组的两个下标
     private void _swap(T[] data, int source, int target) {
         T temp = data[source];
         data[source] = data[target];
         data[target] = temp;
     }
+
     //求两个数的最小值
     private Object min(Object source,Object target){
         if(_compare(source,target)==-1){
