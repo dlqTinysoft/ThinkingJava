@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * Created by 董乐强 on 2017/11/26.
  */
+@NamedQuery(name = "testName",query = "from Customer c where c.id=?")
 @Table(name = "JPA_CUSTOMER")
 @Entity
 public class Customer {
@@ -31,6 +32,12 @@ public class Customer {
     @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.REMOVE},mappedBy = "customer")
     private Set<Order> orders = new HashSet<>();
     public Customer() {
+    }
+
+    public Customer( int age, Date birth,String lastName) {
+        this.lastName = lastName;
+        this.age = age;
+        this.birth = birth;
     }
 
     public Set<Order> getOrders() {
