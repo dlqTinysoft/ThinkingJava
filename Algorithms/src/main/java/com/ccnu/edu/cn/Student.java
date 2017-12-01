@@ -3,7 +3,7 @@ package com.ccnu.edu.cn;
 /**
  * Created by 董乐强 on 2017/11/23.
  */
-public class Student {
+public class Student implements  Comparable<Student> {
     private Integer id;
     private String name;
     private Integer age;
@@ -36,5 +36,9 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public int compareTo(Student o) {
+        return this.getAge()>o.getAge()?1:(this.getAge()==o.getAge()?0:-1);
     }
 }
