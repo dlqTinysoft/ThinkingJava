@@ -1,6 +1,7 @@
 package com.ccnu.edu.cn;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * Created by 董乐强 on 2017/11/30.
@@ -8,7 +9,7 @@ import java.util.Comparator;
  */
 public class MaxHeap<T> {
     //堆的容量
-    private final static int capacity = 17;
+    private final static int capacity = 16;
     //堆中元素的个数
     private int count;
     //用于存储堆中的元素
@@ -17,7 +18,7 @@ public class MaxHeap<T> {
     private Comparator<Object> comparator;
 
     public MaxHeap() {
-        objects = new Object[MaxHeap.capacity];
+        objects = new Object[MaxHeap.capacity + 1];
     }
 
     public MaxHeap(int capacity) {
@@ -42,17 +43,77 @@ public class MaxHeap<T> {
         shiftUp(count);
     }
 
-    //遍历堆中所有元素
+    //得到堆顶元素,如果堆中没有元素，则返回null
+    public T getMaxHeadTop() {
+        T data = null;
+        if (count!=0) {
+            //向下调整
+            data = (T) objects[1];
+            _swap(1, count--);
+            shiftDown(1);
+            return data;
+        }
+        return data;
+    }
 
+    //遍历堆中所有元素,返回的是一个内部类对象,即返回一个迭代器对象
+    public Iterator<T> iterator() {
+        return new Itr();
+    }
 
+    //得到堆中的元素个数
+    public int count(){
+        return count;
+    }
+
+    private void shiftDown(int position) {
+        int leftChild = 2 * position;
+        int rightChild = 2 * position + 1;
+        int j = leftChild;
+        while (j<=count) {
+            //j指向position最大的一个孩子
+            //注意这个地方必须要进行判断，rightChild要小于count才可以，要不然左孩子有可能不存在
+            if (rightChild<=count && _compare(j, rightChild) == -1)
+                j = rightChild;
+
+            if (_compare(position, j) == -1)
+                _swap(position, j);
+            else
+                break;
+            //往下扫描
+            position = j;
+            //j始终指向leftChild
+            j = 2 * position;
+            rightChild = 2 * position + 1;
+        }
+    }
+
+    //用于迭代堆中的所有元素
+    private class Itr implements Iterator<T> {
+        int size = 1;
+
+        public boolean hasNext() {
+            return size <= count;
+        }
+
+        public T next() {
+            return (T) objects[size++];
+        }
+
+        public void remove() {
+            throw new RuntimeException("not support remove");
+        }
+    }
 
     //来调整堆，从下往上的进行调整
     private void shiftUp(int position) {
         //得到其父节点的位置
         int parent = position / 2;
         //一定要将parent>1写在判断前面，可以加快效率，还有一点就是当加入一个元素时，如果先判断比较的话，会出现null异常，因为1/2=0 ,但是0位置为null
-        while ( parent > 1 && _compare(position, parent) == 1 ) {
+        while (parent >= 1 && _compare(position, parent) == 1) {
             _swap(position, parent);
+            //当前节点要往上移动，不能漏
+            position = parent;
             parent = parent / 2;
         }
     }

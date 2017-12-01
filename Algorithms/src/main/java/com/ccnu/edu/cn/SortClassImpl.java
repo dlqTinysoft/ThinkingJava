@@ -10,6 +10,7 @@ public class SortClassImpl<T> implements  SortClass<T>{
 
     //构造方法传入一个比较器
     public SortClassImpl(Comparator<Object> comparator) {
+
         this.comparator = comparator;
     }
 
