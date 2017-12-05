@@ -32,6 +32,14 @@ public class MaxHeap<T> {
         this.comparator = comparator;
     }
 
+    //插入一个数组，使这个数组满足堆的性质
+    public MaxHeap(T [] data){
+         objects = data;
+         count = objects.length;
+         for(int i =count/2-1 ; i>=0 ;i--)
+             //进行向下调整，数组下标是从0开始的，不是从1开始的向下调整
+             shiftDown1(i);
+    }
     //像堆中插入一个元素
     public void insert(T data) {
         //如果元素个数大于capacity则抛出异常
@@ -46,11 +54,11 @@ public class MaxHeap<T> {
     //得到堆顶元素,如果堆中没有元素，则返回null
     public T getMaxHeadTop() {
         T data = null;
-        if (count!=0) {
+        if (count!=-1) {
             //向下调整
-            data = (T) objects[1];
-            _swap(1, count--);
-            shiftDown(1);
+            data = (T) objects[0];
+            _swap(0, --count);
+            shiftDown1(0);
             return data;
         }
         return data;
@@ -66,6 +74,7 @@ public class MaxHeap<T> {
         return count;
     }
 
+    //数组下标从1开始，往下调整
     private void shiftDown(int position) {
         int leftChild = 2 * position;
         int rightChild = 2 * position + 1;
@@ -85,6 +94,30 @@ public class MaxHeap<T> {
             //j始终指向leftChild
             j = 2 * position;
             rightChild = 2 * position + 1;
+        }
+    }
+    //数组下标从1开始，往下调整
+    private void shiftDown1(int position){
+        int leftChild = 2 * position+1;
+        int rightChild = 2 * position + 2;
+        int j = leftChild;
+        //j<=count-1的判断是很有技巧的，也就是j>=count了，则j的父节点肯定就是叶子节点了，则调整结束，跳出循环就ok
+        //特别注意数组下标是从0开始的，一定要注意边界问题
+        while (j<=count-1) {
+            //j指向position最大的一个孩子
+            //注意这个地方必须要进行判断，rightChild要小于count才可以，要不然右孩子有可能不存在
+            if (rightChild<=count-1 && _compare(j, rightChild) == -1)
+                j = rightChild;
+
+            if (_compare(position, j) == -1)
+                _swap(position, j);
+            else
+                break;
+            //往下扫描
+            position = j;
+            //j始终指向leftChild
+            j = 2 * position+1;
+            rightChild = 2 * position + 2;
         }
     }
 

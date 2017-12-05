@@ -106,6 +106,32 @@ public class SortClassImpl<T> implements  SortClass<T>{
     }
 
     /**
+     * 堆排序算法的实现
+     * 注意这样的堆排序有个缺陷就是多占用了O(n)的空间
+     * @param data
+     */
+    @Override
+    public void HeapSort(T[] data) {
+        //在这个堆排序中遇到了一个问题，就是关于java引用的问题，非常重要，一定要搞清楚，要不然，写的程序会混乱
+        /**
+         * 一定注意必须从新new 一个空间
+         * 如果这样写，会得不到正确的结果
+         *  T[] temp = data;
+         *  MaxHeap<T> maxHeap = new MaxHeap<>(temp);
+         *  for(int i = 0 ; i<data.length;i++)
+         *  data[i]=maxHeap.getMaxHeadTop(); //这一步出现了一个致命的错误,就是data,temp 和堆里面的objects都指向一个
+         *  空间，则我把 data[i]里面的值改变了， objects的值也改变了 然后我对objects每次第一个元素出堆都进行调整，岂不是数据
+         *  全乱了，出现了奇葩的结果，java的引用一定要注意了，现在看来，基本功很重要，一定要注意每个细节，总结这个问题，得到的结论
+         *  就是没经验,还要多写程序呀
+         */
+        Object [] temp = new Object[data.length];
+        MaxHeap<T> maxHeap = new MaxHeap<>(data);
+        for(int i = 0 ;i<data.length;i++)
+           temp[i] = maxHeap.getMaxHeadTop();
+        data= (T[]) temp;
+    }
+
+    /**
      * 快速排序代码实现,单路寻找枢轴,
      * 序列基本有序或者序列有大量的重复，则性能非常差，时间复杂度直接变为O(n^2)
      * 平均时间复杂度为O(nlogn),最好的情况下为O(nlogn),最坏情况下为：O(n^2)

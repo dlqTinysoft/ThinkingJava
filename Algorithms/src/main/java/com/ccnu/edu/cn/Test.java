@@ -1,5 +1,10 @@
 package com.ccnu.edu.cn;
 
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.InvocationHandler;
+import org.hibernate.annotations.Sort;
+
+import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -7,18 +12,25 @@ import java.util.Random;
  * Created by 董乐强 on 2017/11/23.
  */
 public class Test {
-
     @org.junit.Test
-    public static void main(String [] args){
-
-        SortClassImpl sortClass = new SortClassImpl(new Comparator<Student>() {
-            public int compare(Student source, Student target) {
-                if(source.getAge()>target.getAge()){
-                    return 1;
-                }else if(source.getAge()<target.getAge()){
-                    return -1;
-                }
-                return 0;
+    public  void application(){
+       SortClassImpl<Student> studentSortClass = new SortClassImpl<>();
+        /**
+         * 第一个参数：被代理类的父类型
+         * 第二个参数:InvocationHandler接口
+         */
+        SortClassImpl<Student> sortClass = (SortClassImpl<Student>) Enhancer.
+                create(SortClassImpl.class, new InvocationHandler() {
+            /**
+             * @param o 代理对象
+             * @param method 当前调用代理的哪个方法
+             * @param args 当前方法的参数
+             * @return 方法返回值
+             * @throws Throwable
+             */
+            @Override
+            public Object invoke(Object o, Method method, Object[] args) throws Throwable {
+                return method.invoke(studentSortClass,args);
             }
         });
 
@@ -26,52 +38,29 @@ public class Test {
         Student [] students = new Student[10000];
         Student student = null;
         students=acquireRandomData(students,r);
-        long begin = System.currentTimeMillis();
         sortClass.speedSort(students);
-        long end = System.currentTimeMillis();
-        System.out.println("单路快速排序: "+"\t\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.speedSort1(students);
-        end = System.currentTimeMillis();
-        System.out.println("二路快速排序: "+"\t\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.speedSort2(students);
-        end = System.currentTimeMillis();
-        System.out.println("三路快速排序: "+"\t\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.insertSort(students);
-        end = System.currentTimeMillis();
-        System.out.println("插入排序(交换): "+"\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.insertSortPromotion(students);
-        end = System.currentTimeMillis();
-        System.out.println("插入排序(移动): "+"\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.selectSort(students);
-        end = System.currentTimeMillis();
-        System.out.println("选择排序: "+"\t\t\t"+(end-begin));
+
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.mergeSort(students);
-        end = System.currentTimeMillis();
-        System.out.println("归并排序(递归): "+"\t\t"+(end-begin));
 
         students=acquireRandomData(students,r);
-        begin = System.currentTimeMillis();
         sortClass.mergeSortPromotion(students);
-        end = System.currentTimeMillis();
-        System.out.println("归并排序(非递归): "+"\t\t"+(end-begin));
     }
 
     private static Student [] acquireRandomData(Student [] students,Random r){
@@ -83,5 +72,25 @@ public class Test {
         }
         return students;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
