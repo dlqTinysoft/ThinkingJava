@@ -1,8 +1,13 @@
 package com.ccnu.edu.domain;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 /**
  * Created by 董乐强 on 2017/11/29.
  */
+@Component(value = "student")
 public class Student {
 
     private  Integer id;
