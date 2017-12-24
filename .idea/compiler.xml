@@ -8,13 +8,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dlq" />
         <module name="jk" />
+        <module name="sell" />
         <module name="springbootdemo" />
+        <module name="springDataDemo" />
+        <module name="springdemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="dlq" target="1.5" />
+      <module name="dlq" target="1.8" />
       <module name="jk" target="1.5" />
+      <module name="sell" target="1.8" />
       <module name="springbootdemo" target="1.8" />
+      <module name="springDataDemo" target="1.5" />
+      <module name="springdemo" target="1.5" />
+      <module name="sprnigData" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

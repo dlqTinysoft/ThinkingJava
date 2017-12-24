@@ -3,9 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ThinkingJava.iml" filepath="$PROJECT_DIR$/ThinkingJava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dlq/dlq.iml" filepath="$PROJECT_DIR$/dlq/dlq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/dlq.iml" filepath="$PROJECT_DIR$/Algorithms/dlq.iml" />
       <module fileurl="file://$PROJECT_DIR$/jk/jk.iml" filepath="$PROJECT_DIR$/jk/jk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpa/jpa.iml" filepath="$PROJECT_DIR$/jpa/jpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sell/sell.iml" filepath="$PROJECT_DIR$/sell/sell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springData/springDataDemo.iml" filepath="$PROJECT_DIR$/springData/springDataDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/springbootdemo/springbootdemo.iml" filepath="$PROJECT_DIR$/springbootdemo/springbootdemo.iml" />
+      <module fileurl="file://F:\code\testgit\ThinkingJava\springdemo\springdemo.iml" filepath="F:\code\testgit\ThinkingJava\springdemo\springdemo.iml" />
     </modules>
   </component>
 </project>

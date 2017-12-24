@@ -6,6 +6,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="jk" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: junit:junit:4.7" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/jk/target/jk/META-INF/MANIFEST.MF" />

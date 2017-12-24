@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sprnigData:war">
+    <output-path>$PROJECT_DIR$/sprnigData/target</output-path>
+    <root id="archive" name="sprnigData-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sprnigData:war exploded" />
+    </root>
+  </artifact>
+</component>

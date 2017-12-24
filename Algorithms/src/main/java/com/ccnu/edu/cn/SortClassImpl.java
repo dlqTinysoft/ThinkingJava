@@ -238,7 +238,6 @@ public class SortClassImpl<T> implements  SortClass<T>{
             _swap(data, i, j);
             i++;
             j--;
-
         }
         _swap(data, left, j);
         return j;
@@ -317,7 +316,7 @@ public class SortClassImpl<T> implements  SortClass<T>{
     }
 
     //用于比较两个数的大小
-    private int _compare(Object source, Object target) {
+    protected int _compare(Object source, Object target) {
         if (comparator != null)
             return comparator.compare(source, target);
         Comparable<Object> comparable = (Comparable<Object>) source;

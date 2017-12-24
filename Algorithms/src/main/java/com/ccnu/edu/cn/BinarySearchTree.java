@@ -2,6 +2,7 @@ package com.ccnu.edu.cn;
 
 import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Queue;
 
 /**
@@ -43,7 +44,6 @@ public class BinarySearchTree<K, V> extends SortClassImpl<K> {
     public BinarySearchTree(Comparator<? extends K> comparator) {
         this.comparator = comparator;
     }
-
 
     public int getCount(){
         return count;

@@ -32,7 +32,13 @@ server:
 wechat:
     mpAppId: wx7ee875b1e7ba2530
     mpAppSecret: 20df1336c240c0a2ab37451b9d14f66c
+    openAppId:
+    openAppSecret:
     mchId:
     mchKey:
     keyPath:
     notifyUrl: http://dlq.natapp1.cc/sell/pay/notify
+projectUrl:
+    wechatMpAuthorize: http://dlq.natapp1.cc
+    wechatOpenAuthorize: http://dlq.natapp1.cc
+    sell:
