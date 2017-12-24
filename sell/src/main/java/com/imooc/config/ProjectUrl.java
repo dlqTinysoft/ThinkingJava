@@ -21,4 +21,6 @@ public class ProjectUrl {
      * 点餐系统
      */
     public String sell;
+    //
+    private String dlq;
 }
