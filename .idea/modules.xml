@@ -9,7 +9,8 @@
       <module fileurl="file://$PROJECT_DIR$/sell/sell.iml" filepath="$PROJECT_DIR$/sell/sell.iml" />
       <module fileurl="file://$PROJECT_DIR$/springData/springDataDemo.iml" filepath="$PROJECT_DIR$/springData/springDataDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/springbootdemo/springbootdemo.iml" filepath="$PROJECT_DIR$/springbootdemo/springbootdemo.iml" />
-      <module fileurl="file://F:\code\testgit\ThinkingJava\springdemo\springdemo.iml" filepath="F:\code\testgit\ThinkingJava\springdemo\springdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springbootdemo/springbootdemo.iml" filepath="$PROJECT_DIR$/springbootdemo/springbootdemo.iml" />
+      <module fileurl="file://F:/code/testgit/ThinkingJava/springdemo/springdemo.iml" filepath="F:/code/testgit/ThinkingJava/springdemo/springdemo.iml" />
     </modules>
   </component>
 </project>
